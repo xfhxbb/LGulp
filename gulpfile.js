@@ -76,6 +76,7 @@
     /*======= 合并压缩js文件 ======*/
     gulp.task('js', function() {
         return gulp.src('./src/js/*.js')
+            .pipe(concat('index.js'))
             .pipe(preprocess({context: {version: getDate()}})) //设置环境变量在线
             .pipe(jshint())
             .pipe(jshint.reporter(stylish))
