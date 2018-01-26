@@ -2,7 +2,9 @@
     'use strict';
     //导入工具包 require('node_modules里对应模块')
     var gulp = require('gulp');
-
+    var browserify = require('browserify');
+    var babelify = require('babelify');
+    var source = require('vinyl-source-stream');
     /*======= 文件删除 ======*/
     var del = require('del');
 
@@ -15,6 +17,7 @@
 
     /*======= 压缩重命名 ======*/
     var rename = require('gulp-rename');
+    var buffer = require('vinyl-buffer');
     var uglify = require('gulp-uglify');
 
     /*======= 合并文件 ======*/
@@ -32,7 +35,7 @@
     var preprocess = require('gulp-preprocess');
 
     function getDate() {
-       return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+        return new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
     }
     var banner = [
         '/**',
@@ -44,14 +47,14 @@
         ' * ',
         ' * email:<%= pkg.email %>',
         ' * ',
-        ' * Copyright '+new Date().getFullYear()+'',
+        ' * Copyright ' + new Date().getFullYear() + '',
         ' * ',
         ' * Licensed under <%= pkg.license %>',
         ' * ',
         ' * 最近修改于： <%= date %>',
         ' */',
         ''
-    ].join('\n')
+    ].join('\n') + 'console.log("version:<%= date %>");\n'
 
     /*======= css ======*/
     gulp.task('css', function() {
@@ -72,45 +75,48 @@
             .pipe(gulp.dest('./dev/img'))
             .pipe(gulp.dest('./public/img'))
     });
-
     /*======= 合并压缩js文件 ======*/
     gulp.task('js', function() {
-        return gulp.src('./src/js/*.js')
-            .pipe(concat('index.js'))
-            .pipe(preprocess({context: {version: getDate()}})) //设置环境变量在线
+        return browserify({
+                entries: './src/js/index.js',
+                debug: true
+            })
+            .transform("babelify", {
+                presets: ["env"]
+            })
+            .bundle()
+            .pipe(source('index.js'))
             .pipe(jshint())
             .pipe(jshint.reporter(stylish))
-            .pipe(gulp.dest('./dev/js'))
-            .pipe(rev())
-            .pipe(uglify())
             .pipe(header(banner, {
                 pkg: pkg,
                 date: getDate()
             }))
-            /*.pipe(rename({
-                extname: '.min.js'
-            }))*/
+            .pipe(gulp.dest('./dev/js'))
+            .pipe(buffer())
+            .pipe(uglify())
             .pipe(gulp.dest('./public/js'))
+            .pipe(rev())
             .pipe(rev.manifest())
             .pipe(gulp.dest('./src/rev'));
     });
 
     gulp.task('revHtml', function() {
-        return gulp.src(['./src/rev/*.json','./src/html/*']) //- 读取 rev-manifest.json 文件以及需要进行路径替换的文件
+        return gulp.src(['./src/rev/*.json', './src/html/*']) //- 读取 rev-manifest.json 文件以及需要进行路径替换的文件
             .pipe(revCollector({
                 replaceReved: true
             })) //- 执行文件内路径的替换
-            .pipe(gulp.dest('./dev/html/'))//- 替换后的文件输出的目录
+            .pipe(gulp.dest('./dev/html/')) //- 替换后的文件输出的目录
             .pipe(gulp.dest('./public/html/')); //- 替换后的文件输出的目录
     });
 
 
     gulp.task('clean', function() {
-       return del(['./dev/js/**/*','./public/js/**/*','./dev/html/**/*','./public/html/**/*','./dev/css/**/*','./public/css/**/*']);
+        return del(['./dev/js/**/*', './public/js/**/*', './dev/html/**/*', './public/html/**/*', './dev/css/**/*', './public/css/**/*']);
     });
 
-    gulp.task('run',['clean'], function() {
-        return runSequence(['lib','img','css','js'], ['revHtml'],['watch']);
+    gulp.task('run', ['clean'], function() {
+        return runSequence(['lib', 'img', 'css', 'js'], ['revHtml'], ['watch']);
     });
 
     gulp.task('watch', function() {

@@ -1,6 +1,6 @@
 {
   "name": "LGulp",
-  "version": "1.0",
+  "version": "1.1",
   "description": "快速脚手架",
   "email": "xfhxbb@yeah.net",
   "homepage": "",
@@ -11,6 +11,8 @@
   "author": "lennyhuang",
   "license": "MIT",
   "devDependencies": {
+    "babelify": "^8.0.0",
+    "browserify": "^15.2.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
@@ -20,9 +22,11 @@
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.2",
     "gulp-rev-collector": "^1.2.3",
-    "gulp-uglify": "^1.5.3",
+    "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.3",
     "jshint-stylish": "^2.2.1",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }

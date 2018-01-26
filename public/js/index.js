@@ -1,16 +1,1 @@
-/**
- * 快速脚手架
- * 
- * version:1.0
- * 
- * author:lennyhuang
- * 
- * email:xfhxbb@yeah.net
- * 
- * Copyright 2017
- * 
- * Licensed under MIT
- * 
- * 最近修改于： 2017-12-29 15:58:50
- */
-var version="2017-12-29 15:58:50";document.querySelector("body").textContent=version;var version="2017-12-29 15:58:50";document.querySelector("body").textContent=version;
+console.log("version:2018-1-26 20:8:19"),function e(r,t,o){function n(i,f){if(!t[i]){if(!r[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var l=new Error("Cannot find module '"+i+"'");throw l.code="MODULE_NOT_FOUND",l}var a=t[i]={exports:{}};r[i][0].call(a.exports,function(e){var t=r[i][1][e];return n(t||e)},a,a.exports,e,r,t,o)}return t[i].exports}for(var u="function"==typeof require&&require,i=0;i<o.length;i++)n(o[i]);return n}({1:[function(e,r,t){"use strict";var o,n=e("./module/b");var u=((o=n)&&o.__esModule?o:{default:o}).default.init();document.querySelector("body").textContent="/* @echo version */ "+u},{"./module/b":2}],2:[function(e,r,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=function(){};o.prototype={init:function(){return"hello world"}};var n=new o;t.default=n},{}]},{},[1]);
