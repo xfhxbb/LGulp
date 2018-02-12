@@ -92,11 +92,11 @@
                 pkg: pkg,
                 date: getDate()
             }))
-            .pipe(gulp.dest('./dev/js'))
             .pipe(buffer())
+            .pipe(rev())
+            .pipe(gulp.dest('./dev/js'))
             .pipe(uglify())
             .pipe(gulp.dest('./public/js'))
-            .pipe(rev())
             .pipe(rev.manifest())
             .pipe(gulp.dest('./src/rev'));
     });

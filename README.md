@@ -45,6 +45,5 @@ gulp
 正式：http://localhost:3000/public/html/index.html
 ```
 ## 注意
-* 为保证js自动生成版本号功能不污染js文件名，本人特殊处理过node_modules内文件，使用时请勿重新npm install。
 * 由于js文件夹内的文件统一合并压缩成index.js，html中关于js文件夹只需要引入index.js即可。
 
