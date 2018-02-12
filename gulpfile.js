@@ -87,7 +87,7 @@
             .bundle()
             .pipe(source('index.js')) 
             .pipe(jshint())
-            .pipe(jshint.reporter(stylish))
+            .pipe(jshint.reporter(stylish)) 
             .pipe(header(banner, {
                 pkg: pkg,
                 date: getDate()
