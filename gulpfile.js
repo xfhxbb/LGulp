@@ -85,7 +85,7 @@
                 presets: ["env"]
             })
             .bundle()
-            .pipe(source('index.js'))
+            .pipe(source('index.js')) 
             .pipe(jshint())
             .pipe(jshint.reporter(stylish))
             .pipe(header(banner, {
