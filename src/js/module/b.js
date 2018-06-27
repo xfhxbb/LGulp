@@ -3,7 +3,7 @@
 /**
  * 
  */
-const version="/* @echo version */";
+import Utils from './utils';
 const b=function() {}
 b.prototype = {
     init: function() {

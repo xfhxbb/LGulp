@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/xfhxbb/LGulp"
   },
-  "author": "lennyhuang", 
+  "author": "lennyhuang",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -20,13 +20,13 @@
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.8.2",
     "gulp-jshint": "^2.0.1",
-    "gulp-preprocess": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.2",
     "gulp-rev-collector": "^1.2.3",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.3",
     "jshint-stylish": "^2.2.1",
+    "require-dir": "^1.0.0",
     "run-sequence": "^1.2.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"

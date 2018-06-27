@@ -4,8 +4,9 @@
  * 
  */
 
-import b from './module/b';
+import b from './module/b'; 
+import Utils from './module/utils';
 
-const str=b.init();
-const version="/* @echo version */";
-document.querySelector('body').textContent=`${version} ${str}`;
+const str=b.init(); 
+document.querySelector('body').textContent=`test`;
+console.log("================");
