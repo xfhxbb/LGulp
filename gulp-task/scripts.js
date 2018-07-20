@@ -51,15 +51,15 @@ let banner = [
         .pipe(source('index.js'))
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
+        .pipe(buffer())
+        //.pipe(rev())
+        .pipe(gulp.dest('./dev/js'))
+        .pipe(uglify())
         .pipe(header(banner, {
             pkg: pkg,
             date: getDate()
         }))
-        .pipe(buffer())
-        .pipe(rev())
-        .pipe(gulp.dest('./dev/js'))
-        .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('./src/rev'));
+        //.pipe(rev.manifest())
+        //.pipe(gulp.dest('./src/rev'));
 });

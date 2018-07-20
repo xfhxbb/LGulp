@@ -22,3 +22,30 @@ body {
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
 }
+
+.content-block {
+    margin: 0 10px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 1px solid #b72f20;
+    border-radius: 5px;
+}
+
+input[type='button'] {
+    color: #fff;
+    background: #b72f20;
+}
+
+p {
+    width: 100%;
+    word-break: break-all;
+}
+
+input,
+p {
+    margin: 5px 0;
+}

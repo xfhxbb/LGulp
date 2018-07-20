@@ -34,30 +34,34 @@
          .pipe(gulp.dest('./public/img'))
  });
 
- gulp.task('revHtml', function() {
-     return gulp.src(['./src/rev/*.json', './src/html/*']) //- 读取 rev-manifest.json 文件以及需要进行路径替换的文件
-         .pipe(revCollector({
-             replaceReved: true
-         })) //- 执行文件内路径的替换
-         .pipe(gulp.dest('./dev/html/')) //- 替换后的文件输出的目录
-         .pipe(gulp.dest('./public/html/')); //- 替换后的文件输出的目录
+ gulp.task('html', function() {
+    return gulp.src(['./src/html/**/*'])
+    .pipe(gulp.dest('./dev/html'))
+    .pipe(gulp.dest('./public/html'));
  });
 
 
  gulp.task('clean', function() {
      return del(['./dev/js/**/*', './public/js/**/*', './dev/html/**/*', './public/html/**/*', './dev/css/**/*', './public/css/**/*']);
  });
+ gulp.task('cleanjs', function() {
+     return del(['./dev/js/**/*', './public/js/**/*']);
+ });
 
  gulp.task('run', ['clean'], function() {
-     return runSequence(['lib', 'img', 'css', 'js'], ['revHtml'], ['watch']);
+     return runSequence(['lib', 'img', 'css', 'buildjs'], ['html'], ['watch']);
+ });
+
+ gulp.task('buildjs',['cleanjs'], function() {
+     return runSequence(['js']);
  });
 
  gulp.task('watch', function() {
      gulp.watch('src/lib/**/*', ['lib']);
      gulp.watch('src/css/**/*', ['css']);
      gulp.watch('src/img/**/*', ['img']);
-     gulp.watch('src/js/**/*', ['run']);
-     gulp.watch('src/html/*.html', ['revHtml']);
+     gulp.watch('src/js/**/*', ['buildjs']);
+     gulp.watch('src/html/*.html', ['html']);
  });
 
  /*
