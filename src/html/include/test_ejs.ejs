@@ -1,0 +1,19 @@
+<% comments.forEach(function(comment){%>
+<div class="text_user_text">
+    <div class="text-img z">
+        <img src="">
+    </div>
+    <div class="user_comment">
+        <div class="spans">
+            <span class="user_name">
+                <strong><%=comment.user%></strong>
+            </span>
+            <span><%=comment.postdate%></span>
+            <i class="del y" data-id="<%=comment.id%>">x</i>
+        </div>
+        <div class="span_comment">
+            <p><%=comment.detail%></p>
+        </div>
+    </div>
+</div>
+<% }) %>

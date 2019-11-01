@@ -2,12 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
+    @@include('./include/meta.html') 
     <title></title>
     <link rel="stylesheet" href="../css/style.css">
     <style type="text/css">
@@ -19,16 +14,8 @@
         <input id="btn1" type="button" value="点我执行throw new Error" />
         <input id="btn2" type="button" value="点我执行console.log" />
     </div>
-    <script src="../js/index.js"></script>
-    <script>
-        document.querySelector('#btn1').addEventListener("click", function (e) {
-            throw new Error("你点击了执行throw new Error的按钮");
-        }); 
-        document.querySelector('#btn2').addEventListener("click", function (e) {
-            console.log(e);
-            console.log("你点击了执行console.log的按钮");
-        });
-    </script>
+    <div id="list"></div>
+    @@include('./include/script.html')
 </body>
 
 </html>
