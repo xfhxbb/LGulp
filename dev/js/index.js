@@ -1710,7 +1710,7 @@ __webpack_require__.r(__webpack_exports__);
 
 //import b from './module/b';
 console.log("sssssssssssssssaaaaa");
-var template = document.querySelector('#comments').innerHTML; 
+var template = document.querySelector('#comments').innerHTML;  
 var html = ejs_ejs__WEBPACK_IMPORTED_MODULE_2___default.a.render(template, {comments: [{user:"123",postdate:"2019",detail:"xxxxxxxxxx"}]})
 document.querySelector('#list').innerHTML = html;
 
