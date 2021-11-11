@@ -12,14 +12,13 @@ html, body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
 }
 
 .content-block {
