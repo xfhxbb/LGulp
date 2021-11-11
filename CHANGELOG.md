@@ -7,3 +7,5 @@
 * 版本注入由gulp-preprocess更改为gulp-header
 ## LGulp1.3.1 - 修改于2017年2月12日
 * 取消了版本号参数的逻辑，npm install后直接使用
+## LGulp2.0.0 - 修改于2021年10月27日
+* 升级了babel7和webpack5的版本

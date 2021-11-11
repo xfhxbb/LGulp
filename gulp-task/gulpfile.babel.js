@@ -1,23 +1,16 @@
 "use strict";
 import gulp from "gulp";
-/*======= 文件删除 ======*/
-import del from "del";
 import child_process from "child_process";
 import bs from "browser-sync";
-import { font, fonttask } from "./font";
-import { img, imgtask } from "./img";
-import { jstask } from "./script";
+import { fontTask } from "./font";
+import { imgTask } from "./img";
+import { cssTask } from "./css";
+import { jsTask } from "./script";
 import { htmltask } from "./html";
+
 
 let browserSync = bs.create();
 
-/*======= css ======*/
-function css() {
-  return gulp
-    .src(["../src/css/**/*"])
-    .pipe(gulp.dest("../dev/css"))
-    .pipe(gulp.dest("../public/css"));
-}
 /*======= lib ======*/
 function lib() {
   return gulp
@@ -26,31 +19,22 @@ function lib() {
     .pipe(gulp.dest("../public/lib"));
 }
 
-function clean() {
-  return del(
-    [
-      "../dev/font/**/*",
-      "../public/font/**/*",
-      "../dev/img/**/*",
-      "../public/img/**/*",
-      "../dev/js/**/*",
-      "../public/js/**/*",
-      "../dev/html/**/*",
-      "../public/html/**/*",
-      "../dev/css/**/*",
-      "../public/css/**/*"
-    ],
-    { force: true }
-  );
-}
-
 let process,
-  restart = function() {
+  restart = function () {
     process && process.kill();
     process = child_process.spawn("gulp.cmd", ["run"], {
       stdio: "inherit"
     });
   };
+
+const build = gulp.series(
+  gulp.parallel(lib, jsTask, cssTask, fontTask, imgTask),
+  htmltask,
+  done => {
+    done();
+  }
+);
+
 function server(cb) {
   browserSync.init({
     server: {
@@ -60,24 +44,25 @@ function server(cb) {
   });
   cb();
 }
+
 function reload(done) {
   browserSync.reload();
   done();
 }
+
 function watch() {
-  gulp.watch("../src/lib/**/*", lib);
-  gulp.watch("../src/css/**/*", css);
-  gulp.watch("../src/font/**/*", fonttask);
-  gulp.watch("../src/img/**/*", imgtask);
-  gulp.watch("../src/js/**/*", gulp.series(htmltask, jstask, reload));
+  gulp.watch("../src/lib/**/*", gulp.series(lib, reload));
+  gulp.watch("../src/css/**/*", gulp.series(cssTask, reload));
+  gulp.watch("../src/font/**/*", gulp.series(fontTask, reload));
+  gulp.watch("../src/img/**/*", gulp.series(imgTask, reload));
+  gulp.watch("../src/js/**/*", gulp.series(jsTask, reload));
   gulp.watch("../src/html/**", gulp.series(htmltask, reload));
-  gulp.watch("./*.js", restart);
+  gulp.watch("../gulp-task/**", restart);
 }
 
+
 exports.run = gulp.series(
-  clean,
-  gulp.parallel(lib, font, img, css, jstask),
-  htmltask,
+  build,
   server,
   watch,
   done => {
