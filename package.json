@@ -11,29 +11,27 @@
   "author": "lennyhuang",
   "license": "MIT",
   "scripts": {
-    "dev": "cd gulp-task && gulp --target=debug --env=local --watch --minify"
+    "start": "cd gulp-task && gulp --target=debug --env=local --watch --minify"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.26.7",
-    "del": "^2.2.2",
-    "ejs": "^2.7.1",
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/register": "^7.15.3",
+    "babel-loader": "^8.2.3",
+    "browser-sync": "2.27.6",
+    "core-js": "^3.19.0",
+    "del": "6.0.0",
+    "ejs": "3.1.6",
     "gulp": "^4.0.2",
-    "gulp-cache-bust": "^1.4.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-file-include": "^2.1.0",
-    "gulp-header": "^1.8.2",
-    "gulp-jshint": "^2.0.1",
-    "gulp-replace": "^1.0.0",
-    "gulp-rev-collector": "^1.2.3",
-    "jshint": "^2.9.3",
-    "jshint-stylish": "^2.2.1",
-    "require-dir": "^1.0.0",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-named": "^1.1.0",
-    "webpack": "^4.41.2",
-    "webpack-stream": "^5.2.1"
-  },
-  "dependencies": {}
+    "gulp-cache-bust": "1.4.1",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-file-include": "2.3.0",
+    "gulp-less": "^5.0.0",
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-merge": "^5.8.0"
+  }
 }

@@ -4,6 +4,10 @@ import fileinclude from "gulp-file-include";
 /*======= 文件MD5时间戳 ======*/
 import cachebust from "gulp-cache-bust";
 
+function cleanHtml() {
+  return del(["../dev/*.html", "../public/*.html"], { force: true });
+}
+
 function html(cb) {
   src(["../src/html/*.html"])
     .pipe(
@@ -22,9 +26,5 @@ function html(cb) {
   cb();
 }
 
-function cleanHtml() {
-  return del(["../dev/html/**/*", "../public/html/**/*"], { force: true });
-}
-
 const htmltask = series(cleanHtml, html);
-export { html, htmltask };
+export { htmltask };

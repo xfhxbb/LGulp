@@ -1,77 +1,34 @@
-import { src, dest, series } from "gulp";
+
+import webpack from "webpack";
+import webpackDev from "./webpack.dev";
+import webpackProd from "./webpack.prod";
 import del from "del";
-/*======= 增加文件头尾 ======*/
-import header from "gulp-header";
-import pkg from "../package.json";
-/*======= 语法检测 ======*/
-import jshint from "gulp-jshint";
-import stylish from "jshint-stylish";
-import named from "vinyl-named";
-import config from "./config";
-import webpack from "webpack-stream";
+import { series } from "gulp";
 
-function getDate() {
-  return (
-    new Date().getFullYear() +
-    "-" +
-    (new Date().getMonth() + 1) +
-    "-" +
-    new Date().getDate() +
-    " " +
-    new Date().getHours() +
-    ":" +
-    new Date().getMinutes() +
-    ":" +
-    new Date().getSeconds()
-  );
-}
-let banner =
-  [
-    "/**",
-    " * <%= pkg.description %>",
-    " * ",
-    " * version:<%= pkg.version %>",
-    " * ",
-    " * author:<%= pkg.author %>",
-    " * ",
-    " * email:<%= pkg.email %>",
-    " * ",
-    " * Copyright " + new Date().getFullYear() + "",
-    " * ",
-    " * Licensed under <%= pkg.license %>",
-    " * ",
-    " * 最近修改于： <%= date %>",
-    " */",
-    ""
-  ].join("\n") + 'console.log("version:<%= date %>");\n';
-
-function cleanjs() {
-  return del(["../dev/js/**/*", "../public/js/**/*"], { force: true });
+const dev = (cb) => {
+  runWebpack(webpackDev, cb);
 }
 
-/*======= 合并压缩js文件 ======*/
-function devjs() {
-  return src(config.entrys)
-    .pipe(named())
-    .pipe(
-      webpack({
-        mode: `development`,
-        devtool: "source-map"
-      })
-    )
-    .pipe(dest("../dev/js"));
+const prod = (cb) => {
+  runWebpack(webpackProd, cb);
 }
 
-function prodjs() {
-  return src(config.entrys)
-    .pipe(named())
-    .pipe(
-      webpack({
-        mode: `production`
-      })
-    )
-    .pipe(dest("../public/js"));
+const runWebpack = (config, cb) => {
+  webpack(config, (err, stats) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(stats.toString());
+    cb();
+  });
 }
 
-const jstask = series(cleanjs, devjs, prodjs);
-export { jstask };
+function cleanJs() {
+  return del(["../dev/js/*", "../public/js/*"], { force: true });
+}
+
+const jsTask = series(cleanJs, dev, prod);
+
+export {
+  jsTask
+}

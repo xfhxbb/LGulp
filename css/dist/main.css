@@ -1,0 +1,34 @@
+@import 'style.css';
+/*
+声明 WebFont
+*/
+@font-face {
+  font-family: 'fzjt';
+  src: url('../font/fzjt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+#aaaaaaaaaaaa {
+  background-image: url('../img/panda.jpg');
+  color: black;
+}
+#aaaaaaaaaaaa .a {
+  background-color: black;
+}
+
+/*
+声明 WebFont
+*/
+@font-face {
+  font-family: 'fzjt';
+  src: url('../font/fzjt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+#aaaaaaaaaaaa {
+  background-image: url('../img/panda.jpg');
+  color: black;
+}
+#aaaaaaaaaaaa .a {
+  background-color: black;
+}
